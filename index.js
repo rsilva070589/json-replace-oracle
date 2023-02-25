@@ -24,11 +24,50 @@ app.get('/itens', async (req, res) => {
   res.send(result.data)
 })
 
+app.delete('/itens/:id?', async (req, res) => {
+  let data = req.body;
+  console.log(data)
+  var result = await axios.delete('http://35.226.231.200:4040/itens/'+data.ID) 
+  res.send(result.data)
+})
+
+app.put('/itens/:id?', async (req, res) => {
+  let data = req.body;
+  res.send(data);
+  console.log(data)
+
+  var config = {
+    method: 'put',
+    maxBodyLength: Infinity,
+    url: 'http://35.226.231.200:4040/itens/' +data.ID,
+    headers: { 
+      'Content-Type': 'application/json'
+    },
+    data : data
+  };
+
+  axios(config)
+.then(function (response) {
+  console.log(JSON.stringify(response.data));
+})
+.catch(function (error) {
+  console.log(error);
+});
+
+ 
+ 
+  
+
+ 
+ 
+
+})
+
 
 
 app.post('/itens', async(req, res) => {
   let data = req.body;
-  res.send('Data Received: ' + JSON.stringify(data));
+  res.send(data);
 
   var config = {
     method: 'post',
