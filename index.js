@@ -6,14 +6,11 @@ import bodyParser from 'body-parser'
 
 
  
-
- 
  
 const app = express()
- 
-app.use(bodyParser.json())
-app.use(bodyParser.urlencoded({ extended: false }))
-app.use(cors()) 
+app.use(cors()).use(bodyParser.json()).use(bodyParser.urlencoded({ extended: false }))
+
+
 const PORT = process.env.PORT || 5050
 const HOST = '0.0.0.0';
   
