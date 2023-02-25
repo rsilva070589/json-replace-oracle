@@ -1,15 +1,22 @@
 import express from 'express' 
 import cors from 'cors'
 import axios from 'axios'
+import bodyParser from 'body-parser'
 
 
+
+ 
+
+ 
+ 
+const app = express()
+ 
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ extended: false }))
+app.use(cors()) 
 const PORT = process.env.PORT || 5050
 const HOST = '0.0.0.0';
   
-
-
-const app = express();
-app.use(cors())
 
 app.get('/', (req, res) => {
   res.send('Aplicacao Rodando na Porta '+ PORT)
@@ -18,6 +25,33 @@ app.get('/', (req, res) => {
 app.get('/itens', async (req, res) => {
   var result = await axios.get('http://35.226.231.200:4040/itens') 
   res.send(result.data)
+})
+
+
+
+app.post('/itens', async(req, res) => {
+  let data = req.body;
+  res.send('Data Received: ' + JSON.stringify(data));
+
+  var config = {
+    method: 'post',
+    maxBodyLength: Infinity,
+    url: 'http://35.226.231.200:4040/itens',
+    headers: { 
+        'Content-Type': 'application/json'
+    },
+    data : data
+    };
+
+    axios(config)
+    .then(function (response) {
+    console.log(JSON.stringify(response.data));
+    })
+    .catch(function (error) {
+    console.log(error);
+    });
+
+
 })
 
 app.get('/itenstipo', async (req, res) => {
