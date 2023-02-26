@@ -53,14 +53,6 @@ app.put('/itens/:id?', async (req, res) => {
 .catch(function (error) {
   console.log(error);
 });
-
- 
- 
-  
-
- 
- 
-
 })
 
 
@@ -85,10 +77,68 @@ app.post('/itens', async(req, res) => {
     })
     .catch(function (error) {
     console.log(error);
-    });
-
-
+    }); 
 })
+
+app.get('/pedidos', async (req, res) => {
+  var result = await axios.get('http://35.226.231.200:4040/pedidos') 
+  res.send(result.data)
+})
+
+
+app.post('/pedidos', async(req, res) => {
+  let data = req.body;
+  res.send(data);
+  var config = {
+    method: 'post',
+    maxBodyLength: Infinity,
+    url: 'http://35.226.231.200:4040/pedidos',
+    headers: { 
+        'Content-Type': 'application/json'
+    },
+    data : data
+    };
+
+    axios(config)
+    .then(function (response) {
+    console.log(JSON.stringify(response.data));
+    })
+    .catch(function (error) {
+    console.log(error);
+    }); 
+})
+
+app.put('/pedidos/:id?', async (req, res) => {
+  let data = req.body;
+  res.send(data);
+  console.log(data)
+
+  var config = {
+    method: 'put',
+    maxBodyLength: Infinity,
+    url: 'http://35.226.231.200:4040/pedidos/' +data.ID,
+    headers: { 
+      'Content-Type': 'application/json'
+    },
+    data : data
+  };
+
+  axios(config)
+.then(function (response) {
+  console.log(JSON.stringify(response.data));
+})
+.catch(function (error) {
+  console.log(error);
+});
+})
+
+app.delete('/pedidos/:id?', async (req, res) => {
+  let data = req.body;
+  console.log(data)
+  var result = await axios.delete('http://35.226.231.200:4040/pedidos/'+data.ID) 
+  res.send(result.data)
+})
+
 
 app.get('/itenstipo', async (req, res) => {
   var result = await axios.get('http://35.226.231.200:4040/itenstipo') 
