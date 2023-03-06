@@ -14,7 +14,7 @@ app.use(cors()).use(bodyParser.json()).use(bodyParser.urlencoded({ extended: fal
 const PORT = process.env.PORT || 5050
 const HOST = '0.0.0.0';
   
-
+////itens/////
 app.get('/', (req, res) => {
   res.send('Aplicacao Rodando na Porta '+ PORT)
 })
@@ -55,8 +55,6 @@ app.put('/itens/:id?', async (req, res) => {
 });
 })
 
-
-
 app.post('/itens', async(req, res) => {
   let data = req.body;
   res.send(data);
@@ -80,11 +78,12 @@ app.post('/itens', async(req, res) => {
     }); 
 })
 
+
+////Pedidos///////
 app.get('/pedidos', async (req, res) => {
   var result = await axios.get('http://35.226.231.200:4040/pedidos') 
   res.send(result.data)
 })
-
 
 app.post('/pedidos', async(req, res) => {
   let data = req.body;
@@ -149,7 +148,51 @@ app.get('/imagens', async (req, res)  => {
   var result = await axios.get('http://35.226.231.200:4040/imagens') 
   res.send(result.data)
 })
+app.post('/imagens', async(req, res) => {
+  let data = req.body;
+  res.send(data);
+  var config = {
+    method: 'post',
+    maxBodyLength: Infinity,
+    url: 'http://35.226.231.200:4040/imagens',
+    headers: { 
+        'Content-Type': 'application/json'
+    },
+    data : data
+    };
 
+    axios(config)
+    .then(function (response) {
+    console.log(JSON.stringify(response.data));
+    })
+    .catch(function (error) {
+    console.log(error);
+    }); 
+})
+
+app.put('/imagens/:id?', async (req, res) => {
+  let data = req.body;
+  res.send(data);
+  console.log(data)
+
+  var config = {
+    method: 'put',
+    maxBodyLength: Infinity,
+    url: 'http://35.226.231.200:4040/imagens/',
+    headers: { 
+      'Content-Type': 'application/json'
+    },
+    data : data
+  };
+
+  axios(config)
+.then(function (response) {
+  console.log(JSON.stringify(response.data));
+})
+.catch(function (error) {
+  console.log(error);
+});
+})
  
 app.post('/dados', function(request, response){
   console.log(request.body);      // your JSON
