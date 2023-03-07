@@ -198,6 +198,104 @@ app.post('/dados', function(request, response){
   console.log(request.body);      // your JSON
    response.send(request.body);    // echo the result back
 });
- 
+  
+
+app.get('/mercadoprodutos', async (req, res)  => {
+  var result = await axios.get('http://35.226.231.200:4040/mercadoprodutos') 
+  res.send(result.data)
+})
+app.put('/mercadoprodutos/:id?', async (req, res) => {
+  let data = req.body;
+  res.send(data);
+  console.log(data)
+
+  var config = {
+    method: 'put',
+    maxBodyLength: Infinity,
+    url: 'http://35.226.231.200:4040/mercadoprodutos/',
+    headers: { 
+      'Content-Type': 'application/json'
+    },
+    data : data
+  };
+
+  axios(config)
+.then(function (response) {
+  console.log(JSON.stringify(response.data));
+})
+.catch(function (error) {
+  console.log(error);
+});
+})
+app.post('/mercadoprodutos', async(req, res) => {
+  let data = req.body;
+  res.send(data);
+  var config = {
+    method: 'post',
+    maxBodyLength: Infinity,
+    url: 'http://35.226.231.200:4040/mercadoprodutos',
+    headers: { 
+        'Content-Type': 'application/json'
+    },
+    data : data
+    };
+
+    axios(config)
+    .then(function (response) {
+    console.log(JSON.stringify(response.data));
+    })
+    .catch(function (error) {
+    console.log(error);
+    }); 
+})
+
+app.get('/mercadovendas', async (req, res)  => {
+  var result = await axios.get('http://35.226.231.200:4040/mercadovendas') 
+  res.send(result.data)
+})
+app.put('/mercadovendas/:id?', async (req, res) => {
+  let data = req.body;
+  res.send(data);
+  console.log(data)
+
+  var config = {
+    method: 'put',
+    maxBodyLength: Infinity,
+    url: 'http://35.226.231.200:4040/mercadovendas/',
+    headers: { 
+      'Content-Type': 'application/json'
+    },
+    data : data
+  };
+
+  axios(config)
+.then(function (response) {
+  console.log(JSON.stringify(response.data));
+})
+.catch(function (error) {
+  console.log(error);
+});
+})
+app.post('/mercadovendas', async(req, res) => {
+  let data = req.body;
+  res.send(data);
+  var config = {
+    method: 'post',
+    maxBodyLength: Infinity,
+    url: 'http://35.226.231.200:4040/mercadovendas',
+    headers: { 
+        'Content-Type': 'application/json'
+    },
+    data : data
+    };
+
+    axios(config)
+    .then(function (response) {
+    console.log(JSON.stringify(response.data));
+    })
+    .catch(function (error) {
+    console.log(error);
+    }); 
+})
 
 app.listen(PORT, HOST, console.log('Aplicacao Rodando na Porta ' + PORT));
