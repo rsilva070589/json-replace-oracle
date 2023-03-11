@@ -212,7 +212,7 @@ app.put('/mercadoprodutos/:id?', async (req, res) => {
   var config = {
     method: 'put',
     maxBodyLength: Infinity,
-    url: 'http://35.226.231.200:4040/mercadoprodutos/',
+    url: 'http://35.226.231.200:4040/mercadoprodutos/'+data.ID,
     headers: { 
       'Content-Type': 'application/json'
     },
