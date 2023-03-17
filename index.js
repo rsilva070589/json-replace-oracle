@@ -131,6 +131,11 @@ app.put('/pedidos/:id?', async (req, res) => {
 });
 })
 
+app.get('/mercadodemanda', async (req, res) => {
+  var result = await axios.get('http://35.226.231.200:4040/mercadodemanda') 
+  res.send(result.data)
+})
+
 app.delete('/pedidos/:id?', async (req, res) => {
   let data = req.body;
   console.log(data)
