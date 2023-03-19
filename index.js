@@ -303,4 +303,31 @@ app.post('/mercadovendas', async(req, res) => {
     }); 
 })
 
+app.get('/mercadocompras', async (req, res)  => {
+  var result = await axios.get('http://35.226.231.200:4040/mercadocompras') 
+  res.send(result.data)
+})
+ 
+app.post('/mercadocompras', async(req, res) => {
+  let data = req.body;
+  res.send(data);
+  var config = {
+    method: 'post',
+    maxBodyLength: Infinity,
+    url: 'http://35.226.231.200:4040/mercadocompras',
+    headers: { 
+        'Content-Type': 'application/json'
+    },
+    data : data
+    };
+
+    axios(config)
+    .then(function (response) {
+    console.log(JSON.stringify(response.data));
+    })
+    .catch(function (error) {
+    console.log(error);
+    }); 
+})
+
 app.listen(PORT, HOST, console.log('Aplicacao Rodando na Porta ' + PORT));
